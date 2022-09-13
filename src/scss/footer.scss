@@ -3,12 +3,90 @@
   padding: 30px 0;
 
   .container {
-
+    @include flex(center, space-between);
+    @include media("max", "xl") {
+      flex-wrap: wrap;
+    }
   }
 
   &__rights {
     color: $white;
     @include fontSize(13px, 16px);
 
+    span {
+      text-transform: uppercase;
+    }
+  }
+
+  .contacts {
+    padding: 0 40.5px 0 42.5px;
+    display: flex;
+    align-items: center;
+    gap: 38px;
+    border-right: 1px solid $semi-white;
+    border-left: 1px solid $semi-white;
+    @include media("max", "xl") {
+      border-left: none;
+      border-right: none;
+      padding: 0;
+      justify-content: flex-end;
+    }
+    @include media("max", "md") {
+      width: 100%;
+      justify-content: flex-start;
+      margin-top: 20px;
+      gap: 16px;
+    }
+    @include media("max", "xs") {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    &__text {
+      color: $semi-white;
+      @include fontSize(13px, 16px);
+    }
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+    @include media("max", "xl") {
+      margin-top: 20px;
+      width: 100%;
+      justify-content: flex-end;
+    }
+    @include media("max", "md") {
+      justify-content: flex-start;
+      gap: 16px;
+    }
+    @include media("max", "xs") {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    &__text {
+      color: $semi-white;
+      @include fontSize(13px, 16px);
+      text-decoration: none;
+
+      &:hover {
+        color: $blue-active;
+        transition: 0.18s all linear;
+      }
+    }
   }
 }

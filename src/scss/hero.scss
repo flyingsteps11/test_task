@@ -1,12 +1,30 @@
 .hero {
-  height: 850px;
+  min-height: 850px;
   padding-top: 203px;
   background-image: url("../img/hero.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding-bottom: 20px;
+  @include media("max", "md") {
+    padding-top: 160px;
+    min-height: 580px;
+  }
+  @include media("max", "sm") {
+    padding-top: 140px;
+    min-height: 520px;
+  }
 
   .container {
     display: grid;
     grid-template-columns: 100%;
     grid-row-gap: 80px;
+    @include media("max", "md") {
+      grid-row-gap: 40px;
+    }
+    @include media("max", "sm") {
+      grid-row-gap: 24px;
+    }
   }
 
   &__title {
@@ -15,6 +33,13 @@
     text-transform: uppercase;
     max-width: 780px;
     color: $black;
+    @include media("max", "md") {
+      @include fontSize(32px, 42px);
+      max-width: 520px;
+    }
+    @include media("max", "sm") {
+      @include fontSize(28px, 36px);
+    }
 
     span {
       color: $blue;
@@ -26,6 +51,9 @@
     font-weight: bold;
     color: $black;
     margin-bottom: 10px;
+    @include media("max", "sm") {
+      @include fontSize(16px, 24px);
+    }
   }
 
   &__list {
@@ -37,6 +65,9 @@
     color: $black;
     margin-bottom: 5px;
     padding-left: 7px;
+    @include media("max", "sm") {
+      @include fontSize(16px, 24px);
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -68,12 +99,23 @@
       border: 1px solid $white;
       background: $blue;
       color: $white;
+
+      &:hover {
+        transition: 0.18s all linear;
+        background: darken($color--primary, 5%) radial-gradient(circle, transparent 1%, darken($color--primary, 5%) 1%) center/15000%;
+      }
     }
 
     &__white {
       border: 1px solid $border;
       background: $white;
       color: $btn-text;
+
+      &:hover {
+        transition: 0.18s all linear;
+        background: $border;
+        color: $white;
+      }
     }
   }
 

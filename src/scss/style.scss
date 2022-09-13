@@ -1,7 +1,10 @@
 @import "mixins";
 @import "fonts";
 @import "variables";
-
+@import "header";
+@import "hero";
+@import "order";
+@import "footer";
 
 * {
   margin: 0;
@@ -20,36 +23,5 @@ html, body {
   max-width: 1202px;
   width: 100%;
   padding: 0 16px;
-}
-
-@import "header";
-@import "hero";
-@import "order";
-@import "footer";
-
-.js-scroll {
-  opacity: 0;
-  transition: opacity 500ms;
-}
-
-.js-scroll.scrolled {
-  opacity: 1;
-}
-
-.scrolled.fade-in-bottom {
-  animation: fade-in-bottom 1s ease-in-out both;
-}
-
-@keyframes fade-in-bottom {
-  0% {
-    -webkit-transform: translateY(10px);
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
 }
 

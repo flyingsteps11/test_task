@@ -1,9 +1,10 @@
 .order {
   padding: 121px 0 151px;
   background-image: url("../img/bg.png");
-
-  .container {
-
+  background-position: center;
+  background-size: cover;
+  @include media("max", "md") {
+    padding: 40px 0;
   }
 
   &__title {
@@ -13,6 +14,10 @@
     margin-bottom: 30px;
     color: white;
     text-transform: uppercase;
+    @include media("max", "md") {
+      @include fontSize(24px, 32px);
+      margin-bottom: 24px;
+    }
 
     span {
       color: $blue;
@@ -23,6 +28,9 @@
     color: $gray;
     @include fontSize(18px, 22px);
     text-align: center;
+    @include media("max", "md") {
+      @include fontSize(16px, 24px);
+    }
   }
 
   &__list {
@@ -30,11 +38,45 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 30px;
+    @include media("max", "xl") {
+      grid-template-columns: repeat(6, 1fr);
+      grid-row-gap: 30px;
+    }
+    @include media("max", "md") {
+      margin-top: 40px;
+    }
+    @include media("max", "sm") {
+      grid-template-columns: 1fr;
+    }
   }
 
   .item {
     @include flex(center, flex-start, column);
     position: relative;
+    @include media("max", "xl") {
+      grid-column: span 2;
+    }
+    @include media("max", "sm") {
+      grid-column: initial;
+    }
+
+    &:nth-last-child(2):nth-child(3n + 1) {
+      @include media("max", "xl") {
+        grid-column-end: 4;
+      }
+      @include media("max", "sm") {
+        grid-column: initial;
+      }
+    }
+
+    &:last-child:nth-child(3n - 1) {
+      @include media("max", "xl") {
+        grid-column-end: -2;
+      }
+      @include media("max", "sm") {
+        grid-column: initial;
+      }
+    }
 
     &__circle {
       width: 100px;
@@ -64,6 +106,9 @@
       display: flex;
       align-items: center;
       gap: 20px;
+      @include media("max", "xl") {
+        display: none;
+      }
     }
 
     &__dot {
@@ -75,6 +120,8 @@
   }
 
   .form {
+    margin-top: 85px;
+
     &__input {
       background: rgba(255, 255, 255, 0.85);
       border: 1px solid $white;
@@ -94,10 +141,19 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-column-gap: 30px;
+      @include media("max", "md") {
+        grid-template-columns: 100%;
+        grid-row-gap: 30px;
+      }
     }
 
     &__bottom {
       display: flex;
+      margin-top: 30px;
+      gap: 22.5px;
+      @include media("max", "lg") {
+        flex-direction: column;
+      }
     }
 
     &__button {
@@ -115,6 +171,13 @@
         background: $white;
         border: 2px solid $blue;
         color: $dark;
+        cursor: pointer;
+        @include media("max", "lg") {
+          margin-top: 30px;
+        }
+        @include media("max", "md") {
+          max-width: none;
+        }
       }
 
       &__send {
@@ -122,80 +185,171 @@
         background: $blue;
         border: 1px solid $white;
         color: $white;
-        margin: 40px auto 0;
+        margin: 55px auto 0;
+        cursor: pointer;
+
+        &:hover {
+          transition: 0.18s all linear;
+          background: darken($color--primary, 5%) radial-gradient(circle, transparent 1%, darken($color--primary, 5%) 1%) center/15000%;
+        }
       }
     }
 
     .dropdown {
-      width: 300px;
+      width: 100%;
       display: inline-block;
-      background-color: #fff;
-      border-radius: 2px;
-      box-shadow: 0 0 2px rgb(204, 204, 204);
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 3px;
+      border: 1px solid $white;
       transition: all .5s ease;
       position: relative;
-      font-size: 14px;
-      color: #474747;
       height: 100%;
       text-align: left;
+      outline: none;
+      user-select: none;
 
       .select {
         cursor: pointer;
         display: block;
         padding: 10px;
+        width: 100%;
+        height: 100%;
+        @include flex(center, space-between);
+        gap: 20px;
+
+        span {
+          @include fontSize(18px, 22px);
+          color: $dark;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          max-width: 220px;
+        }
       }
 
-      &:hover {
-        box-shadow: 0 0 4px rgb(204, 204, 204);
-      }
+      &.active {
+        border-top: $footer;
+        border-left: $footer;
+        border-right: $footer;
+        border-bottom: none;
+        border-radius: 3px 3px 0 0;
+        background: rgba(61, 64, 80, 0.85);
 
-      &:active {
-        background-color: #f8f8f8;
+        .select {
+          span {
+            color: $white;
+          }
+        }
       }
 
       &.active:hover, &.active {
-        box-shadow: 0 0 4px rgb(204, 204, 204);
-        border-radius: 2px 2px 0 0;
-        background-color: #f8f8f8
+
       }
 
       &-menu {
+        display: none;
         position: absolute;
-        background-color: #fff;
+        background: rgba(39, 39, 51, 0.9);
+        border: 1px solid $footer;
+        border-radius: 0 0 3px 3px;
         width: 100%;
         left: 0;
-        margin-top: 1px;
-        box-shadow: 0 1px 2px rgb(204, 204, 204);
-        border-radius: 0 1px 2px 2px;
-        overflow: hidden;
-        display: none;
-        max-height: 144px;
-        overflow-y: auto;
         z-index: 9;
+        @include fontSize(18px, 22px);
+        color: $white;
+        padding: 4px 4px 4px 0;
+
 
         li {
           padding: 10px;
           transition: all .2s ease-in-out;
           cursor: pointer;
+
+          &:hover {
+            color: $blue-semi;
+          }
+        }
+      }
+
+      &-list {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 180px;
+
+        &::-webkit-scrollbar {
+          width: 7px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: $footer;
+          border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: $blue;
+          border-radius: 3px;
         }
       }
     }
 
-    //.dropdown.active .select > i {
-    //  transform: rotate(-90deg)
-    //}
+    .dropdown.active .select > svg {
+      transform: rotate(180deg);
+
+      path {
+        fill: $white;
+      }
+    }
 
     .dropdown .dropdown-menu {
-      padding: 0;
       list-style: none
     }
 
-    .dropdown .dropdown-menu li:hover {
-      background-color: #f2f2f2
+    &__slider {
+      width: 100%;
     }
 
-    .dropdown .dropdown-menu li:active {
-      background-color: #e2e2e2
+    &__info {
+      @include flex(flex-start, space-between);
+      gap: 10px;
+      padding-right: 6px;
+
+      span {
+        color: $white;
+        @include fontSize(18px, 22px);
+
+        &:last-child {
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.85);
+
+          &:after {
+            content: '%';
+            margin-left: 3px;
+          }
+        }
+      }
+    }
+
+    .slider {
+      width: 99%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid $white;
+      transition: opacity .2s;
+      appearance: none;
+      outline: none;
+      margin: 19px 0 0 3.5px;
+      border-radius: 3px;
+      display: block;
+
+      &::-webkit-slider-thumb {
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        background: $blue-semi;
+        border: 1px solid #286690;
+        cursor: pointer;
+        border-radius: 50%;
+      }
     }
   }
 }

@@ -7,6 +7,9 @@
   left: 0;
   z-index: 100;
   width: 100%;
+  @include media("max", "lg") {
+    height: 80px;
+  }
 
   .container {
     @include flex(center, space-between);
@@ -30,6 +33,9 @@
     display: flex;
     align-items: center;
     gap: 60px;
+    @include media("max", "lg") {
+      display: none;
+    }
 
     &__item {
       @include fontSize(13px, 16px);
@@ -40,10 +46,123 @@
       a {
         color: inherit;
         text-decoration: none;
+        position: relative;
+
+        &:after {
+          display: block;
+          position: absolute;
+          left: 0;
+          width: 0;
+          height: 1px;
+          background-color: $white;
+          content: '';
+          transition: width 0.3s ease-out;
+        }
+
+        &:hover:after,
+        &:focus:after {
+          width: 100%;
+        }
       }
 
       &__active {
         color: $blue-active;
+      }
+    }
+  }
+}
+
+.hamburger-menu {
+  display: none;
+  @include media("max", "lg") {
+    display: block;
+  }
+
+  #menu__toggle {
+    opacity: 0;
+  }
+
+  #menu__toggle:checked ~ .menu__btn > span {
+    transform: rotate(45deg);
+  }
+
+  #menu__toggle:checked ~ .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0);
+  }
+
+  #menu__toggle:checked ~ .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+
+  #menu__toggle:checked ~ .menu__box {
+    visibility: visible;
+    right: 0;
+  }
+
+  .menu__btn {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 26px;
+    right: 20px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .menu__btn > span,
+  .menu__btn > span::before,
+  .menu__btn > span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #616161;
+    transition-duration: .25s;
+  }
+
+  .menu__btn > span::before {
+    content: '';
+    top: -8px;
+  }
+
+  .menu__btn > span::after {
+    content: '';
+    top: 8px;
+  }
+
+  .menu__box {
+    @include flex(center, center, column);
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: #FFFFFF;
+    transition-duration: .25s;
+
+    ul {
+      list-style-type: none;
+    }
+
+    li {
+      text-align: center;
+    }
+
+    a {
+      @include fontSize(24px, 32px);
+      text-transform: uppercase;
+      font-weight: 600;
+      color: $dark;
+      text-decoration: none;
+
+      &:hover {
+        color: $blue;
       }
     }
   }
