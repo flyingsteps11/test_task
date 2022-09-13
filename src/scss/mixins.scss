@@ -1,0 +1,67 @@
+@mixin font($font_name, $file_name, $weight, $style) {
+  @font-face {
+    font-family: $font_name;
+    font-display: swap;
+    src: url("../fonts/#{$file_name}.woff") format("woff"),
+    url("../fonts/#{$file_name}.woff2") format("woff2");
+    font-weight: #{$weight};
+    font-style: #{$style};
+  }
+}
+
+// Font
+@mixin fontSize($font-size, $line-height) {
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+//flex
+@mixin flex($align-items: center, $justify-content: center, $flex-direction: row, $inline: false) {
+  @if $inline {
+    display: inline-flex;
+  } @else {
+    display: flex;
+  }
+  align-items: $align-items;
+  justify-content: $justify-content;
+  flex-direction: $flex-direction;
+}
+
+//media
+$sizes: (
+        "xs": 360px,
+        "sm": 576px,
+        "md": 768px,
+        "lg": 992px,
+        "xl": 1200px,
+        "xxl": 1440px,
+        "full": 1920px,
+);
+@function getPreviousSize($currentSize) {
+  $keys: map-keys($sizes);
+  $index: index($keys, $currentSize)-1;
+  $value: map-values($sizes);
+  @return nth($value, $index);
+}
+
+@mixin media($minmax, $media) {
+  @each $size, $resolution in $sizes {
+    @if $media == $size {
+      @if ($minmax != "within") {
+        @media only screen and (#{$minmax}-width: $resolution) {
+          @content;
+        }
+      } @else {
+        @if (index(map-keys($sizes), $media) > 1) {
+          @media only screen and (min-width: getPreviousSize($media + 1)) and (max-width: $resolution) {
+            @content;
+          }
+        } @else {
+          @media only screen and (max-width: $resolution) {
+            @content;
+          }
+        }
+      }
+    }
+  }
+}
