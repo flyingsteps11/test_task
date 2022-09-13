@@ -92,6 +92,11 @@
       }
     }
 
+    &__img {
+      width: 55px;
+      height: 56px;
+    }
+
     &__text {
       margin-top: 20px;
       @include fontSize(16px, 19px);
@@ -351,5 +356,10 @@
         border-radius: 50%;
       }
     }
+  }
+
+  .btn-img {
+    width: 18px;
+    height: 21px;
   }
 }

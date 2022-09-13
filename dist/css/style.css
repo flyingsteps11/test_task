@@ -448,6 +448,11 @@
   height: 55px;
 }
 
+.order .item__img {
+  width: 55px;
+  height: 56px;
+}
+
 .order .item__text {
   margin-top: 20px;
   font-size: 16px;
@@ -767,6 +772,11 @@
   border-radius: 50%;
 }
 
+.order .btn-img {
+  width: 18px;
+  height: 21px;
+}
+
 .footer {
   background: #3D4050;
   padding: 30px 0;
@@ -825,6 +835,11 @@
   color: #C3C3C3;
   font-size: 13px;
   line-height: 16px;
+}
+
+.footer .contacts__img {
+  width: 21px;
+  height: 20px;
 }
 
 .footer .links {

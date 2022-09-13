@@ -52,6 +52,11 @@
       color: $semi-white;
       @include fontSize(13px, 16px);
     }
+
+    &__img {
+      width: 21px;
+      height: 20px;
+    }
   }
 
   .links {
